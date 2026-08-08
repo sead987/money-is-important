@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit Converter · ToolBox</title>
+  <link rel="stylesheet" href="shared/style.css">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    .converter-card {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    label {
+      display: block;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    select, input {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .result-box {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: var(--bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .result-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 0.5rem;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <header></header>
+  
+  <main class="container">
+    <div class="card converter-card">
+      <h2 style="margin-bottom: 1.5rem; text-align: center;">Unit Converter</h2>
+
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category">
+          <option value="length">Length</option>
+          <option value="weight">Weight / Mass</option>
+          <option value="temperature">Temperature</option>
+          <option value="area">Area</option>
+          <option value="volume">Volume</option>
+          <option value="speed">Speed</option>
+          <option value="time">Time</option>
+          <option value="digital">Digital Storage</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="fromValue">Value</label>
+        <input type="number" id="fromValue" value="1">
+      </div>
+
+      <div style="display: flex; gap: 15px; margin-bottom: 1.25rem;">
+        <div style="flex: 1;">
+          <label for="fromUnit">From</label>
+          <select id="fromUnit"></select>
+        </div>
+        <div style="flex: 1;">
+          <label for="toUnit">To</label>
+          <select id="toUnit"></select>
+        </div>
+      </div>
+
+      <div class="result-box">
+        <label>Result</label>
+        <div class="result-value" id="resultDisplay">0</div>
+        <button class="btn-copy" id="copyResultBtn" style="margin-top: 10px;">Copy Result</button>
+      </div>
+    </div>
+  </main>
+
+  <footer></footer>
+
+  <script src="shared/app.js"></script>
+  <script>
+    const categorySelect = document.getElementById('category');
+    const fromValueInput = document.getElementById('fromValue');
+    const fromUnitSelect = document.getElementById('fromUnit');
+    const toUnitSelect = document.getElementById('toUnit');
+    const resultDisplay = document.getElementById('resultDisplay');
+    const copyResultBtn = document.getElementById('copyResultBtn');
+
+    const units = {
+      length: { meters: 1, kilometers: 1000, centimeters: 0.01, millimeters: 0.001, miles: 1609.34, yards: 0.9144, feet: 0.3048, inches: 0.0254 },
+      weight: { kilograms: 1, grams: 0.001, milligrams: 0.000001, metricTons: 1000, pounds: 0.453592, ounces: 0.0283495 },
+      temperature: ['celsius', 'fahrenheit', 'kelvin'],
+      area: { squareMeters: 1, squareKilometers: 1000000, squareFeet: 0.092903, squareMiles: 2589988.11, acres: 4046.86, hectares: 10000 },
+      volume: { liters: 1, milliliters: 0.001, cubicMeters: 1000, gallons: 3.78541, quarts: 0.946353, cups: 0.24, fluidOunces: 0.0295735 },
+      speed: { metersPerSec: 1, kmPerHour: 0.277778, milesPerHour: 0.44704, knots: 0.514444 },
+      time: { seconds: 1, minutes: 60, hours: 3600, days: 86400, weeks: 604800 },
+      digital: { bytes: 1, kilobytes: 1024, megabytes: 1048576, gigabytes: 1073741824, terabytes: 1099511627776 }
+    };
+
+    function formatLabel(name) {
+      const words = name.replace(/([A-Z])/g, ' $1');
+      return words.charAt(0).toUpperCase() + words.slice(1);
+    }
+
+    function populateUnits() {
+      const category = categorySelect.value;
+      fromUnitSelect.innerHTML = '';
+      toUnitSelect.innerHTML = '';
+      const options = Array.isArray(units[category]) ? units[category] : Object.keys(units[category]);
+      options.forEach((unit) => {
+        const opt1 = document.createElement('option');
+        opt1.value = unit;
+        opt1.textContent = formatLabel(unit);
+        fromUnitSelect.appendChild(opt1);
+        const opt2 = document.createElement('option');
+        opt2.value = unit;
+        opt2.textContent = formatLabel(unit);
+        toUnitSelect.appendChild(opt2);
+      });
+      if (options.length > 1) toUnitSelect.selectedIndex = 1;
+      convert();
+    }
+
+    function convert() {
+      const category = categorySelect.value;
+      const val = parseFloat(fromValueInput.value);
+      const from = fromUnitSelect.value;
+      const to = toUnitSelect.value;
+      if (isNaN(val)) { resultDisplay.textContent = '---'; return; }
+      let result;
+      if (category === 'temperature') {
+        let celsius;
+        if (from === 'celsius') celsius = val;
+        else if (from === 'fahrenheit') celsius = (val - 32) * (5 / 9);
+        else if (from === 'kelvin') celsius = val - 273.15;
+        if (to === 'celsius') result = celsius;
+        else if (to === 'fahrenheit') result = (celsius * (9 / 5)) + 32;
+        else if (to === 'kelvin') result = celsius + 273.15;
+      } else {
+        const inBase = val * units[category][from];
+        result = inBase / units[category][to];
+      }
+      let formattedResult = (Math.abs(result) < 0.000001 || Math.abs(result) >= 1e9) ? result.toExponential(4) : Number(result.toFixed(6)).toString();
+      resultDisplay.textContent = `${formattedResult} ${formatLabel(to)}`;
+    }
+
+    copyResultBtn.addEventListener('click', () => {
+      copyToClipboard(resultDisplay.textContent, copyResultBtn);
+    });
+
+    categorySelect.addEventListener('change', populateUnits);
+    fromValueInput.addEventListener('input', convert);
+    fromUnitSelect.addEventListener('change', convert);
+    toUnitSelect.addEventListener('change', convert);
+    populateUnits();
+  </script>
+</body>
+</html>

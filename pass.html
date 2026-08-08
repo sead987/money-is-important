@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Generator · ToolBox</title>
+  <link rel="stylesheet" href="shared/style.css">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    .result-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg);
+      padding: 1rem;
+      border-radius: var(--radius);
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+    }
+    #password {
+      font-family: monospace;
+      font-size: 1.25rem;
+      word-break: break-all;
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .setting {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .setting input[type="number"] {
+      width: 70px;
+      padding: 0.5rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+    }
+    .btn-generate {
+      width: 100%;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header></header>
+  
+  <main class="container" style="max-width: 500px;">
+    <div class="card">
+      <h2 style="margin-bottom: 1.5rem; text-align: center;">Password Generator</h2>
+      
+      <div class="result-container">
+        <span id="password">Click Generate</span>
+        <button class="btn-copy" id="copyBtn">Copy</button>
+      </div>
+
+      <div class="settings">
+        <div class="setting">
+          <label for="length">Length</label>
+          <input type="number" id="length" min="4" max="64" value="16">
+        </div>
+        <div class="setting">
+          <label for="uppercase">Uppercase Letters</label>
+          <input type="checkbox" id="uppercase" checked>
+        </div>
+        <div class="setting">
+          <label for="lowercase">Lowercase Letters</label>
+          <input type="checkbox" id="lowercase" checked>
+        </div>
+        <div class="setting">
+          <label for="numbers">Include Numbers</label>
+          <input type="checkbox" id="numbers" checked>
+        </div>
+        <div class="setting">
+          <label for="symbols">Include Symbols</label>
+          <input type="checkbox" id="symbols" checked>
+        </div>
+      </div>
+
+      <button class="btn-primary btn-generate" id="generateBtn">Generate Password</button>
+    </div>
+  </main>
+
+  <footer></footer>
+
+  <script src="shared/app.js"></script>
+  <script>
+    const passwordEl = document.getElementById('password');
+    const lengthEl = document.getElementById('length');
+    const uppercaseEl = document.getElementById('uppercase');
+    const lowercaseEl = document.getElementById('lowercase');
+    const numbersEl = document.getElementById('numbers');
+    const symbolsEl = document.getElementById('symbols');
+    const generateBtn = document.getElementById('generateBtn');
+    const copyBtn = document.getElementById('copyBtn');
+
+    const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+    const numberChars = '0123456789';
+    const symbolChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+    function generatePassword() {
+      let length = parseInt(lengthEl.value) || 16;
+      if (length < 4) length = 4;
+      if (length > 128) length = 128;
+      lengthEl.value = length;
+
+      let validChars = '';
+      if (uppercaseEl.checked) validChars += uppercaseChars;
+      if (lowercaseEl.checked) validChars += lowercaseChars;
+      if (numbersEl.checked) validChars += numberChars;
+      if (symbolsEl.checked) validChars += symbolChars;
+
+      if (validChars === '') {
+        passwordEl.innerText = 'Select Options';
+        return;
+      }
+
+      let generatedPassword = '';
+      const array = new Uint32Array(length);
+      window.crypto.getRandomValues(array);
+
+      for (let i = 0; i < length; i++) {
+        generatedPassword += validChars[array[i] % validChars.length];
+      }
+
+      passwordEl.innerText = generatedPassword;
+    }
+
+    copyBtn.addEventListener('click', () => {
+      copyToClipboard(passwordEl.innerText, copyBtn);
+    });
+
+    generateBtn.addEventListener('click', generatePassword);
+    generatePassword();
+  </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "Nexa Tools",
+  "short_name": "Nexa",
+  "description": "Essential utility tools that work offline.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#7c3aed",
+  "icons": [
+    {
+      "src": "logo.jpg",
+      "sizes": "1024x1024",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
