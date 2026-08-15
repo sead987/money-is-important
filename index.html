@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexa Tools · Premium Utility Suite</title>
+  <title>Zenit Suite · Professional Utilities</title>
   <link rel="stylesheet" href="shared/style.css">
   <link rel="manifest" href="manifest.json">
   <style>
@@ -12,96 +12,84 @@
       padding: 6rem 1rem 4rem;
     }
     .hero h2 {
-      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
       font-weight: 900;
-      letter-spacing: -0.05em;
-      line-height: 1;
+      letter-spacing: -0.06em;
+      line-height: 0.95;
       margin-bottom: 1.5rem;
-      background: linear-gradient(to right, var(--primary), #a855f7, #ec4899);
+      background: linear-gradient(to right, var(--primary), #22d3ee, #0ea5e9);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .hero p {
       color: var(--text-muted);
       font-size: 1.25rem;
-      max-width: 600px;
+      max-width: 650px;
       margin: 0 auto 2.5rem;
       font-weight: 500;
     }
     .app-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
       margin-bottom: 6rem;
     }
     .app-card {
       text-decoration: none;
       color: inherit;
-      padding: 2rem;
+      padding: 2.5rem;
       background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 24px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       flex-direction: column;
       position: relative;
-      overflow: hidden;
-    }
-    .app-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.05), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
     }
     .app-card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-12px);
       border-color: var(--primary);
       box-shadow: var(--shadow-lg);
     }
-    .app-card:hover::before {
-      opacity: 1;
-    }
     .app-icon {
-      width: 56px;
-      height: 56px;
+      width: 64px;
+      height: 64px;
       background: rgba(var(--primary-rgb), 0.1);
       color: var(--primary);
-      border-radius: 14px;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       transition: all 0.3s;
     }
     .app-card:hover .app-icon {
       background: var(--primary);
       color: white;
-      transform: scale(1.1) rotate(-5deg);
+      transform: scale(1.1) rotate(5deg);
     }
     .app-card h3 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.02em;
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.03em;
     }
     .app-card p {
       color: var(--text-muted);
-      font-size: 0.9375rem;
-      line-height: 1.5;
+      font-size: 1rem;
+      line-height: 1.6;
     }
     .badge {
       display: inline-block;
-      padding: 0.25rem 0.75rem;
+      padding: 0.4rem 1rem;
       background: rgba(var(--primary-rgb), 0.1);
       color: var(--primary);
       border-radius: 100px;
       font-size: 0.75rem;
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 2rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.1em;
     }
   </style>
 </head>
@@ -110,45 +98,45 @@
 
   <main class="container">
     <section class="hero animate-in">
-      <span class="badge">Version 2.0 Pro</span>
-      <h2>Powerful tools, locally in your browser.</h2>
-      <p>Nexa Tools provides high-performance utilities with zero server-side tracking. Fast, secure, and beautiful.</p>
-      <div style="display:flex; justify-content:center; gap:1rem">
-        <a href="#tools" class="btn-primary" style="padding: 1rem 2.5rem; border-radius:100px; font-size:1rem">Explore Tools</a>
+      <span class="badge">Zenit Suite Pro</span>
+      <h2>The toolkit for the modern web.</h2>
+      <p>Precision utilities crafted for performance. Secure, fast, and works entirely within your browser—no data collection, ever.</p>
+      <div style="display:flex; justify-content:center; gap:1.5rem">
+        <a href="#tools" class="btn-primary" style="padding: 1.25rem 3rem; border-radius:100px; font-size:1.125rem">Get Started</a>
       </div>
     </section>
 
     <div class="app-grid" id="tools">
       <a href="color.html" class="app-card animate-in" style="animation-delay: 0.1s">
         <div class="app-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
         </div>
-        <h3>Color Palette</h3>
-        <p>Advanced harmony-based color generation with palette locking features.</p>
+        <h3>Color Lab</h3>
+        <p>Advanced palette generation with AI-ready harmonies and interactive color locking.</p>
       </a>
 
       <a href="pass.html" class="app-card animate-in" style="animation-delay: 0.2s">
         <div class="app-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
         </div>
-        <h3>Security Key</h3>
-        <p>Generate military-grade, cryptographically secure passwords in seconds.</p>
+        <h3>Cipher Key</h3>
+        <p>Generate high-entropy, military-grade secure passwords for total account protection.</p>
       </a>
 
       <a href="qr.html" class="app-card animate-in" style="animation-delay: 0.3s">
         <div class="app-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
         </div>
         <h3>QR Studio</h3>
-        <p>A full-featured QR code lab. Generate high-res codes or scan using your camera.</p>
+        <p>Professional QR lab with instant camera scanning and high-res vector code generation.</p>
       </a>
 
       <a href="unit.html" class="app-card animate-in" style="animation-delay: 0.4s">
         <div class="app-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg>
         </div>
-        <h3>Omni Converter</h3>
-        <p>Professional unit conversion across 8 categories with smart number formatting.</p>
+        <h3>Omni Convert</h3>
+        <p>Ultra-precise unit conversion suite across 8 major categories with instant formatting.</p>
       </a>
     </div>
   </main>
