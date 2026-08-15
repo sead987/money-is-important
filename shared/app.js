@@ -1,4 +1,4 @@
-// Stratum Tools Shared Logic
+// Vantage Tools Shared Logic
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initNavigation();
@@ -43,8 +43,8 @@ function initNavigation() {
           </a>
         ` : ''}
         <a href="index.html" class="logo-container">
-          <img src="logo.jpg" alt="Stratum Tools Logo">
-          <h1>Stratum Tools</h1>
+          <img src="logo.jpg" alt="Vantage Tools Logo">
+          <h1>Vantage Tools</h1>
         </a>
       </div>
       <nav>
@@ -70,7 +70,7 @@ function initFooter() {
   const footer = document.querySelector('footer');
   if (footer && !footer.innerHTML.trim()) {
     footer.innerHTML = `
-      <p>&copy; 2026 Stratum Tools. Premium browser-based utilities.</p>
+      <p>&copy; 2026 Vantage Tools. Premium browser-based utilities.</p>
       <div style="margin-top: 15px; display: flex; justify-content: center; gap: 20px;">
         <a href="index.html" class="nav-link">Home</a>
         <a href="#" class="nav-link">Privacy Policy</a>
@@ -99,7 +99,7 @@ async function shareApp() {
   if (navigator.share) {
     try {
       await navigator.share({
-        title: 'Stratum Tools',
+        title: 'Vantage Tools',
         text: 'The ultimate browser toolkit.',
         url: window.location.origin,
       });

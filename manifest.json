@@ -1,6 +1,6 @@
 {
-  "name": "Stratum Tools",
-  "short_name": "Stratum",
+  "name": "Vantage Tools",
+  "short_name": "Vantage",
   "description": "Essential utility tools that work offline.",
   "start_url": "index.html",
   "display": "standalone",
